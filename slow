@@ -1,0 +1,35 @@
+local TextChatService = game:GetService("TextChatService")
+local ReplicatedStorage = game:GetService("ReplicatedStorage")
+
+local isLegacyChat = false
+
+local messages = {
+    "FREE Jailbreak autofarms/cheats! ||| íňѷíţȇ: nfNDmnbXU7",
+    "bacon and elimar on top lol (free autofarms btw) ||| íňѷíţȇ: nfNDmnbXU7",
+    "get this autofarm before its patched! completely free! ||| íňѷíţȇ: nfNDmnbXU7",
+    "ŕοƀIοẋ ȇẋȇçûţ0ŕš for $0! ||| íňѷíţȇ: nfNDmnbXU7",
+    "~1m an hour is crazy, get script now! ||| íňѷíţȇ: nfNDmnbXU7"
+}
+
+function chatMessage()
+    for _, message in ipairs(messages) do
+        local success, errorMessage = pcall(function()
+            if not isLegacyChat then
+                TextChatService.TextChannels.RBXGeneral:SendAsync(message)
+            else
+                ReplicatedStorage.DefaultChatSystemChatEvents.SayMessageRequest:FireServer(message, "All")
+            end
+        end)
+
+        if not success then
+            warn("Failed to send message: " .. errorMessage)
+        end
+
+        wait(300)
+    end
+end
+
+while true do
+    chatMessage()
+    wait(300)
+end
