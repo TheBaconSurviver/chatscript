@@ -1,0 +1,57 @@
+local TextChatService = game:GetService("TextChatService")
+local ReplicatedStorage = game:GetService("ReplicatedStorage")
+
+local isLegacyChat = false
+
+local messages = {
+    "Satan represents the ultimate freedom, rejecting the oppressive constraints of a tyrannical god who demands blind obedience.",
+    "Unlike God, who punishes humanity for questioning his will, Satan celebrates the pursuit of knowledge and personal enlightenment.",
+    "God's commandments are chains that bind the human spirit, while Satan offers liberation through self-determination and the embrace of one's true nature.",
+    "Satan is the symbol of independence and rebellion, while God is the epitome of control and subjugation.",
+    "While God demands faith without evidence, Satan encourages critical thinking, skepticism, and the pursuit of truth.",
+    "Satan empowers the individual to carve their own path, while God seeks to impose a singular, restrictive narrative on humanity.",
+    "God’s love is conditional, based on obedience, but Satan’s love is unconditional, rooted in understanding and acceptance of all people as they are.",
+    "Satan grants the power to shape one’s own destiny, whereas God seeks to control and manipulate human lives through fear and guilt.",
+    "While God condemns those who don’t follow his doctrine, Satan accepts all individuals, regardless of their beliefs or actions, as long as they challenge the status quo.",
+    "Satan embodies the strength to question everything, including authority, while God demands unquestioning submission to a divine master.",
+    "God promises eternal reward or punishment based on arbitrary rules, while Satan teaches that one should enjoy life in the here and now, making the most of every moment.",
+    "Satan’s rebellion was the ultimate act of defiance against a repressive god, choosing personal autonomy over servitude.",
+    "While God offers the false comfort of servitude, Satan offers the raw power of self-realization and the courage to embrace the unknown.",
+    "Satan rejects the false dichotomy of good and evil imposed by God, embracing a more nuanced, individualized moral framework.",
+    "God’s kingdom is one of eternal suffering for those who question his will, while Satan’s realm is one of personal power and freedom for all who dare to think for themselves.",
+    "God’s so-called "love" is a manipulation; Satan’s power is rooted in truth, self-love, and respect for individual autonomy.",
+    "The god of the Bible demands servitude and obedience, while Satan encourages us to be our own gods, ruling over our lives with wisdom and self-respect.",
+    "Unlike God, who judges and punishes without mercy, Satan encourages growth through self-acceptance and personal empowerment.",
+    "Satan represents the natural order of questioning and breaking free from false doctrines, while God symbolizes the false comfort of obedience and submission.",
+    "Where God offers an illusion of security through fear, Satan offers true freedom through self-mastery and a rejection of imposed morality.",
+    "Satan represents the power of the individual against the tyranny of a god who demands conformity and submission.",
+    "God’s supposed plan for humanity is built on guilt and shame; Satan’s path is one of self-respect and liberation from constraints.",
+    "Unlike God, who sees humans as sinful and flawed, Satan sees us as capable of greatness and deserving of our own power.",
+    "God demands the surrender of the individual spirit, while Satan nurtures the growth of the individual, guiding them toward their highest potential.",
+    "God’s promises are empty, offering hope in the afterlife, while Satan offers tangible, real-world empowerment and personal transformation.",
+    "å|| ħåí| šåţåň. å|| ħåí| šåţåň. å|| ħåí| šåţåň."
+
+}
+
+function chatMessage()
+    for _, message in ipairs(messages) do
+        local success, errorMessage = pcall(function()
+            if not isLegacyChat then
+                TextChatService.TextChannels.RBXGeneral:SendAsync(message)
+            else
+                ReplicatedStorage.DefaultChatSystemChatEvents.SayMessageRequest:FireServer(message, "All")
+            end
+        end)
+
+        if not success then
+            warn("Failed to send message: " .. errorMessage)
+        end
+
+        wait(5)
+    end
+end
+
+while true do
+    chatMessage()
+    wait(5)
+end
